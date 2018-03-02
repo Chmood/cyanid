@@ -1,0 +1,42 @@
+/******************************************************************************
+ * CYANID - CONTAINER
+ * Depends on : Gutter, Breakpoints, Units tools
+ ******************************************************************************/
+
+////////////////////////////////////////////////////////////////////////////////
+// TODO
+// - Improve .container: mush stay fluid not only on `min` screen size
+// - Containers width bug (seems related to vertical scrollbar)
+
+////////////////////////////////////////////////////////////////////////////////
+// MIXINS
+
+// CONTAINER
+@mixin container() {
+  margin-right: $gutter;
+  margin-left: $gutter;
+  overflow: hidden;
+}
+
+// CONTAINERSIZE
+@mixin container-size($width) {
+  width: em2rem($width) - $gutter-double; // TODO: container width bug
+  margin-right: auto;
+  margin-left: auto;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// CLASSES
+
+/* CONTAINER */
+.container {
+  @include container();
+
+  &:not(.container--fluid) {
+    @each $breakpoint-name, $breakpoint-width in $breakpoints {
+      @media (min-width: $breakpoint-width) {
+        @include container-size($breakpoint-width);
+      }
+    }
+  }
+}

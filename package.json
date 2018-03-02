@@ -1,0 +1,26 @@
+{
+  "name": "cyanid",
+  "version": "1.0.0",
+  "description": "CSS flexbox grid and layout toolbox",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chmood/cyanid.git"
+  },
+  "keywords": [
+    "CSS",
+    "Sass",
+    "Flexbox",
+    "Grid",
+    "Responsive"
+  ],
+  "author": "Nicolas Giethlen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Chmood/cyanid/issues"
+  },
+  "homepage": "https://github.com/Chmood/cyanid#readme"
+}
