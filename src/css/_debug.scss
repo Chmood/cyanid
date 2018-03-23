@@ -57,7 +57,7 @@ $debug-zone-text-color: chartreuse;
         content: $breakpoint-name; // name
       }
       .debug-zone__item--bp::after {
-        content: ' (' + bp($breakpoint-name) +
+        content: ' (' + bp($breakpoint-name) + ' / ' +
           em2rem(bp($breakpoint-name)) + ' / ' +
           em2px(bp($breakpoint-name)) + ')';
       }
