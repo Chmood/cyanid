@@ -13,9 +13,12 @@
 
 // CONTAINER
 @mixin container() {
-  margin-right: $gutter;
-  margin-left: $gutter;
-  overflow: hidden;
+  margin-right: $gutter-half;
+  margin-left: $gutter-half;
+
+  // Pain point : overflow hidden keeps vertical gutter with container nice but breaks overflowing elements
+  // TODO: find a solution to this!
+  // overflow: hidden;
 }
 
 // CONTAINERSIZE
@@ -38,5 +41,15 @@
         @include container-size($breakpoint-width);
       }
     }
+  }
+}
+
+// Ugly code: containers must stay full-width below $expanded breakpoint
+// TODO: use map-remove($map, $key) to handle this!
+.container:not(.container--fluid) {
+  @include bp($expanded, true) {
+    width: auto !important;
+    margin-right: $gutter-half !important;
+    margin-left: $gutter-half !important;
   }
 }

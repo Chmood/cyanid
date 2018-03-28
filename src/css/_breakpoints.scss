@@ -28,6 +28,10 @@ $breakpoints: (
   'xl': 100em  // 1600 px
 ) !default;
 
+// The breakpoint at which starts the desktop layout
+// .container is full-width until this breakpoint
+$expanded: 'md' !default;
+
 ////////////////////////////////////////////////////////////////////////////////
 // FUNCTIONS
 
@@ -60,3 +64,47 @@ $breakpoints: (
     @warn 'ERROR in mixin bp(): unknown breakpoint #{$point}';
   }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// CLASSES
+
+// VISIBILITY HELPERS
+
+@each $breakpoint-name, $breakpoint-width in $breakpoints {
+  .visible-#{$breakpoint-name} {
+    @include bp($breakpoint-name) {
+      display: initial;
+    }
+  }
+
+  .hidden-#{$breakpoint-name} {
+    @include bp($breakpoint-name) {
+      display: none;
+    }
+  }
+}
+
+.visible-collapsed {
+  @include bp($expanded, true) {
+    display: initial;
+  }
+}
+
+.hidden-collapsed {
+  @include bp($expanded, true) {
+    display: none;
+  }
+}
+
+.visible-expanded {
+  @include bp($expanded) {
+    display: initial;
+  }
+}
+
+.hidden-expanded {
+  @include bp($expanded) {
+    display: none;
+  }
+}
+
