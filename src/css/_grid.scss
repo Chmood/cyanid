@@ -24,6 +24,30 @@ $n-children-max: 12 !default; // Max number of columns
 ////////////////////////////////////////////////////////////////////////////////
 // MIXINS
 
+// IE
+// IE 10 & 11 flexbox #7 bug
+// See: https://github.com/philipwalton/flexbugs#flexbug-7
+// IE10 & IE11 media query selector hack
+// See: https://paper-leaf.com/blog/2014/09/targeting-ie-10-11-browsers-css/
+@mixin ifIE() {
+	@media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {  
+		/* IE10+ specific styles go here */  
+		@content;	
+	}
+}
+
+// FLEX BASIS WIDTH
+// Handles flexbox #7 bug
+// Only works for horizontal grids
+@mixin flex-basis-width($param) {
+	flex-basis: $param;
+
+	@include ifIE() {
+		flex-basis: auto;
+		width: $param;
+	}
+}
+
 // ROW
 @mixin row($mods: "") {
 	@each $mod in $mods {
@@ -81,7 +105,7 @@ $n-children-max: 12 !default; // Max number of columns
 		@elseif $mod == "bottom" { 						align-self: flex-end; }
 		@elseif $mod == "fit" { 							flex-grow: 0; }	
 		@elseif $mod == "fill" { 							flex-grow: 1; }
-		@elseif $mod == "full" { 							flex-basis: 100%;	}	
+		@elseif $mod == "full" { 							@include flex-basis-width(100%);	}	
 
 		@else {
 			@error "ERROR in mixin col(): unknown modifier `#{$mod}`";
@@ -91,7 +115,7 @@ $n-children-max: 12 !default; // Max number of columns
 
 // COLSIZE
 @mixin colSize($total, $size: 1) {
-	flex-basis: fraktion($total, $size);
+	@include flex-basis-width(fraktion($total, $size));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
