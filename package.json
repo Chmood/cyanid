@@ -1,6 +1,6 @@
 {
   "name": "cyanid",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CSS flexbox grid and layout toolbox",
   "main": "index.html",
   "scripts": {
